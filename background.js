@@ -9,7 +9,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
             return;
         }
 
-        const prompt = 'Briefly summarize the following article for personal research purposes, use bullet points:';
+        const prompt = 'Very briefly summarize the following article for personal research purposes, use bullet points:';
         const requestBody = JSON.stringify({
             model: 'meta-llama/llama-3-8b-instruct',
             messages: [
