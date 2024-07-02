@@ -9,9 +9,9 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
             return;
         }
 
-        const prompt = 'Summarize the following article:';
+        const prompt = 'Briefly summarize the following article for personal research purposes, use bullet points:';
         const requestBody = JSON.stringify({
-            model: 'google/gemma-2-9b-it:free',
+            model: 'meta-llama/llama-3-8b-instruct',
             messages: [
                 { role: 'user', content: `${prompt}\n\n${articleText}` }
             ]
