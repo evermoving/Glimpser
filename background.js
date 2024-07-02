@@ -1,5 +1,5 @@
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === 'sendText') {
+    if (message.action === 'summarize') {
         const articleText = message.data;
         console.log('Received article text:', articleText);
         
@@ -11,7 +11,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
         const prompt = 'Summarize the following article:';
         const requestBody = JSON.stringify({
-            model: 'anthropic/claude-3.5-sonnet',
+            model: 'google/gemma-2-9b-it:free',
             messages: [
                 { role: 'user', content: `${prompt}\n\n${articleText}` }
             ]
@@ -37,15 +37,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
             console.log('Received response from API:', data);
             const summary = data.choices[0].message.content;
             console.log('Summary:', summary);
-            // Save the summary to local storage
-            browser.storage.local.set({ summary: summary }, () => {
-                if (browser.runtime.lastError) {
-                    console.error('Error saving summary:', browser.runtime.lastError);
-                    sendResponse({ success: false, error: browser.runtime.lastError });
-                } else {
-                    sendResponse({ success: true });
-                }
-            });
+            sendResponse({ success: true, summary: summary });
         })
         .catch(error => {
             console.error('Error:', error);

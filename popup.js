@@ -1,18 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('status').innerText = 'Processing...';
+    const statusElement = document.getElementById('status');
+    const summaryElement = document.getElementById('summary');
 
-    // Fetch the summary from local storage
-    browser.storage.local.get('summary', (result) => {
-        if (browser.runtime.lastError) {
-            document.getElementById('status').innerText = 'Error processing request.';
-            console.error('Error:', browser.runtime.lastError);
-        } else {
-            document.getElementById('status').innerText = '';
-            if (result.summary) {
-                document.getElementById('summary').innerText = result.summary;
-            } else {
-                document.getElementById('summary').innerText = 'No summary available.';
-            }
-        }
+    statusElement.innerText = 'Click to summarize';
+    summaryElement.innerText = '';
+
+    document.body.addEventListener('click', () => {
+        statusElement.innerText = 'Processing...';
+        summaryElement.innerText = '';
+
+        browser.tabs.query({active: true, currentWindow: true}, (tabs) => {
+            browser.tabs.sendMessage(tabs[0].id, {action: "extractText"})
+                .then(response => {
+                    if (response && response.text) {
+                        return browser.runtime.sendMessage({
+                            action: 'summarize',
+                            data: response.text
+                        });
+                    } else {
+                        throw new Error('No text extracted');
+                    }
+                })
+                .then(response => {
+                    if (response && response.summary) {
+                        statusElement.innerText = '';
+                        summaryElement.innerText = response.summary;
+                    } else {
+                        throw new Error('No summary received');
+                    }
+                })
+                .catch(error => {
+                    statusElement.innerText = 'Error: ' + error.message;
+                });
+        });
     });
 });
