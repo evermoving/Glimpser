@@ -1,3 +1,4 @@
+//models: anthropic/claude-3-haiku (best), openchat/openchat-7b (poor)
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'summarize') {
         const articleText = message.data;
@@ -9,9 +10,9 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
             return;
         }
 
-        const prompt = 'Very briefly summarize the following article for personal research purposes, use bullet points:';
+        const prompt = 'Summarize the following article for personal research purposes, use bullet points:';
         const requestBody = JSON.stringify({
-            model: 'meta-llama/llama-3-8b-instruct',
+            model: 'anthropic/claude-3-haiku',
             messages: [
                 { role: 'user', content: `${prompt}\n\n${articleText}` }
             ]

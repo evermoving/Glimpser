@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "News Summarizer",
+    "name": "Dark Summariser",
     "version": "1.0",
-    "description": "Summarizes news articles",
+    "description": "Summarises any piece of text, be it an article or a wikipedia page.",
     "permissions": [
       "activeTab",
       "storage"
