@@ -1,7 +1,3 @@
-browser.browserAction.onClicked.addListener((tab) => {
-    browser.tabs.sendMessage(tab.id, { action: 'extractText' });
-});
-
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'sendText') {
         const articleText = message.data;

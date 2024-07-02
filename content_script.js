@@ -7,11 +7,14 @@ function extractText() {
     return articleText.trim();
 }
 
-browser.runtime.onMessage.addListener((message) => {
-    if (message.action === 'extractText') {
-        const articleText = extractText();
-        console.log('Extracted article text:', articleText);
-        // Send the extracted text to the background script
-        browser.runtime.sendMessage({ action: 'sendText', data: articleText });
-    }
-});
+const articleText = extractText();
+console.log('Extracted article text:', articleText);
+
+// Send the extracted text to the background script
+browser.runtime.sendMessage({ action: 'sendText', data: articleText })
+    .then(response => {
+        console.log('Message sent to background:', response);
+    })
+    .catch(error => {
+        console.error('Error sending message to background:', error);
+    });
