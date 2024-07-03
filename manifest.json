@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "fff",
+    "name": "Glimpser: AI-based text Summariser",
     "version": "1.0",
     "description": "Summarises any piece of text in an opened tab",
     "permissions": [
@@ -11,8 +11,8 @@
       "default_popup": "popup.html",
       "default_icon": {
         "16": "icons/GLIMPSER_V5_16.png",
-        "48": "icons/LIMPSER_V5_48.png",
-        "128": "icons/LIMPSER_V5_128.png"
+        "48": "icons/GLIMPSER_V5_48.png",
+        "128": "icons/GLIMPSER_V5_128.png"
       }
     },
     "background": {
@@ -27,7 +27,7 @@
     ],
     "icons": {
       "16": "icons/GLIMPSER_V5_16.png",
-      "48": "icons/LIMPSER_V5_48.png",
-      "128": "icons/LIMPSER_V5_128.png"
+      "48": "icons/GLIMPSER_V5_48.png",
+      "128": "icons/GLIMPSER_V5_128.png"
     }
 }
