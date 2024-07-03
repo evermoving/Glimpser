@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "Dark Summariser",
+    "name": "fff",
     "version": "1.0",
-    "description": "Summarises any piece of text, be it an article or a wikipedia page.",
+    "description": "Summarises any piece of text in an opened tab",
     "permissions": [
       "activeTab",
       "storage"
