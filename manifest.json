@@ -1,32 +1,33 @@
 {
-  "manifest_version": 2,
-  "name": "News Summarizer",
-  "version": "1.0",
-  "description": "Summarizes news articles",
-  "permissions": [
-    "activeTab",
-    "storage"
-  ],
-  "browser_action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
+    "manifest_version": 2,
+    "name": "Glimpser: AI-based text Summariser",
+    "version": "1.0",
+    "description": "Summarises any piece of text in an opened tab",
+    "permissions": [
+      "activeTab",
+      "storage"
+    ],
+    "browser_action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icons/GLIMPSER_V5_16.png",
+        "48": "icons/GLIMPSER_V5_48.png",
+        "128": "icons/GLIMPSER_V5_128.png"
+      }
+    },
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": true
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content_script.js", "libs/readability.js"]
+      }
+    ],
+    "icons": {
+      "16": "icons/GLIMPSER_V5_16.png",
+      "48": "icons/GLIMPSER_V5_48.png",
+      "128": "icons/GLIMPSER_V5_128.png"
     }
-  },
-  "background": {
-    "scripts": ["background.js"]
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content_script.js"]
-    }
-  ],
-  "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
-  }
 }
