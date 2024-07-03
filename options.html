@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Glimpser Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Glimpser Settings</h1>
+    <label for="model">Model:</label>
+    <input type="text" id="model" placeholder="anthropic/claude-3-haiku">
+    <label for="apiKey">API Key:</label>
+    <input type="text" id="apiKey" placeholder="Enter your API key">
+    <label for="prompt">Prompt:</label>
+    <input type="text" id="prompt" placeholder="Summarize the following article for personal research purposes, use bullet points:">
+    <button id="save">Save</button>
+    <div id="status"></div>
+    <script src="options.js"></script>
+</body>
+</html>

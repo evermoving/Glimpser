@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 })
                 .then(response => {
-                    if (response && response.summary) {
+                    if (response.success && response.summary) {
                         statusElement.innerText = '';
                         summaryElement.innerText = response.summary;
                     } else {
-                        throw new Error('No summary received');
+                        throw new Error(response.error || 'No summary received');
                     }
                 })
                 .catch(error => {

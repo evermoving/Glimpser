@@ -1,4 +1,3 @@
-//models: anthropic/claude-3-haiku (best), openchat/openchat-7b (poor)
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'summarize') {
         const articleText = message.data;
@@ -7,26 +6,36 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (!articleText) {
             console.error('No article text provided.');
             sendResponse({ success: false, error: 'No article text provided.' });
-            return;
+            return true;
         }
 
-        const prompt = 'Summarize the following article for personal research purposes, use bullet points:';
-        const requestBody = JSON.stringify({
-            model: 'anthropic/claude-3-haiku',
-            messages: [
-                { role: 'user', content: `${prompt}\n\n${articleText}` }
-            ]
-        });
+        browser.storage.sync.get(['model', 'apiKey', 'prompt']).then((result) => {
+            const model = result.model || 'anthropic/claude-3-haiku';
+            const apiKey = result.apiKey;
+            const prompt = result.prompt || 'Summarize the following article for personal research purposes, use bullet points:';
 
-        console.log('Request body:', requestBody);
+            if (!apiKey) {
+                sendResponse({ success: false, error: 'API key not provided. Right click on the extension -> Manage extension -> Settings.' });
+                return;
+            }
 
-        fetch('https://openrouter.ai/api/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer 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`,
-                'Content-Type': 'application/json'
-            },
-            body: requestBody
+            const requestBody = JSON.stringify({
+                model: model,
+                messages: [
+                    { role: 'user', content: `${prompt}\n\n${articleText}` }
+                ]
+            });
+
+            console.log('Request body:', requestBody);
+
+            return fetch('https://openrouter.ai/api/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: requestBody
+            });
         })
         .then(response => {
             if (!response.ok) {
@@ -45,7 +54,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
             sendResponse({ success: false, error: error.message });
         });
 
-        // Ensure sendResponse is called asynchronously
+        // Indicate that we will send a response asynchronously
         return true;
     }
 });
