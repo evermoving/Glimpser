@@ -2,10 +2,37 @@ body {
     font-family: Arial, sans-serif;
     background-color: rgb(51, 50, 50);
     color: rgb(223, 222, 222);
+    width: 300px;
+    padding: 10px;
+}
+
+#popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#summary-type {
+    flex-grow: 1;
+    margin-right: 10px;
+    background-color: rgb(70, 70, 70);
+    color: white;
+    border: 1px solid rgb(100, 100, 100);
+    padding: 5px;
+}
+
+#close-popup {
+    background-color: rgb(70, 70, 70);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 #status {
-    color: rgb(238, 238, 238); /* You might want to change this to a lighter shade for better contras.t */
+    color: rgb(238, 238, 238);
+    margin-bottom: 10px;
 }
 
 #summary {

@@ -1,7 +1,9 @@
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'summarize') {
         const articleText = message.data;
+        const summaryType = message.summaryType;
         console.log('Received article text:', articleText);
+        console.log('Summary type:', summaryType);
         
         if (!articleText) {
             console.error('No article text provided.');
@@ -9,10 +11,12 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
             return true;
         }
 
-        browser.storage.sync.get(['model', 'apiKey', 'prompt']).then((result) => {
+        browser.storage.sync.get(['model', 'apiKey', 'shortPrompt', 'longPrompt']).then((result) => {
             const model = result.model || 'anthropic/claude-3-haiku';
             const apiKey = result.apiKey;
-            const prompt = result.prompt || 'Summarize the following article for personal research purposes, use bullet points:';
+            const prompt = summaryType === 'short' ? 
+                (result.shortPrompt || 'Summarize the following article for personal research purposes, use bullet points:') :
+                (result.longPrompt || 'Summarise comprehensively');
 
             if (!apiKey) {
                 sendResponse({ success: false, error: 'API key not provided. Right click on the extension -> Manage extension -> Three dots -> Options.' });

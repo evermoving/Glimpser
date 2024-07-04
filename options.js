@@ -1,15 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     const modelInput = document.getElementById('model');
     const apiKeyInput = document.getElementById('apiKey');
-    const promptInput = document.getElementById('prompt');
+    const shortPromptInput = document.getElementById('shortPrompt');
+    const longPromptInput = document.getElementById('longPrompt');
     const saveButton = document.getElementById('save');
     const statusDiv = document.getElementById('status');
 
     // Load saved settings
-    browser.storage.sync.get(['model', 'apiKey', 'prompt'], (result) => {
+    browser.storage.sync.get(['model', 'apiKey', 'shortPrompt', 'longPrompt'], (result) => {
         modelInput.value = result.model || 'anthropic/claude-3-haiku';
         apiKeyInput.value = result.apiKey || '';
-        promptInput.value = result.prompt || 'Summarize the following article for personal research purposes, use bullet points:';
+        shortPromptInput.value = result.shortPrompt || 'Summarize the following article for personal research purposes, use bullet points:';
+        longPromptInput.value = result.longPrompt || 'Summarise comprehensively';
     });
 
     // Save settings
@@ -17,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         browser.storage.sync.set({
             model: modelInput.value,
             apiKey: apiKeyInput.value,
-            prompt: promptInput.value
+            shortPrompt: shortPromptInput.value,
+            longPrompt: longPromptInput.value
         }, () => {
             statusDiv.textContent = 'Settings saved!';
             setTimeout(() => {

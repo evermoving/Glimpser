@@ -5,7 +5,14 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div id="status">Processing...</div>
+    <div id="popup-header">
+        <select id="summary-type">
+            <option value="short">Shorter summary</option>
+            <option value="long">Longer summary</option>
+        </select>
+        <button id="close-popup">X</button>
+    </div>
+    <div id="status">Select summary type and click to summarize</div>
     <div id="summary"></div>
     <script src="popup.js"></script>
 </body>

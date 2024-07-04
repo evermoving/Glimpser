@@ -1,13 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     const statusElement = document.getElementById('status');
     const summaryElement = document.getElementById('summary');
+    const summaryTypeSelect = document.getElementById('summary-type');
+    const closePopupButton = document.getElementById('close-popup');
 
-    statusElement.innerText = 'Click to summarize';
+    statusElement.innerText = 'Select summary type and click to summarize';
     summaryElement.innerText = '';
 
-    document.body.addEventListener('click', () => {
+    closePopupButton.addEventListener('click', () => {
+        window.close();
+    });
+
+    document.body.addEventListener('click', (event) => {
+        if (event.target.id === 'close-popup') return;
+
         statusElement.innerText = 'Processing...';
         summaryElement.innerText = '';
+
+        const summaryType = summaryTypeSelect.value;
 
         browser.tabs.query({active: true, currentWindow: true}, (tabs) => {
             browser.tabs.sendMessage(tabs[0].id, {action: "extractText"})
@@ -15,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (response && response.text) {
                         return browser.runtime.sendMessage({
                             action: 'summarize',
-                            data: response.text
+                            data: response.text,
+                            summaryType: summaryType
                         });
                     } else {
                         throw new Error('No text extracted');
