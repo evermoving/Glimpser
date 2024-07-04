@@ -15,7 +15,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
             const prompt = result.prompt || 'Summarize the following article for personal research purposes, use bullet points:';
 
             if (!apiKey) {
-                sendResponse({ success: false, error: 'API key not provided. Right click on the extension -> Manage extension -> Settings.' });
+                sendResponse({ success: false, error: 'API key not provided. Right click on the extension -> Manage extension -> Three dots -> Options.' });
                 return;
             }
 
