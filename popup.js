@@ -3,17 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryElement = document.getElementById('summary');
     const summaryTypeSelect = document.getElementById('summary-type');
     const closePopupButton = document.getElementById('close-popup');
+    const summarizeButton = document.getElementById('summarize-button');
 
-    statusElement.innerText = 'Select summary type and click to summarize';
+    statusElement.innerText = 'Select summary type and click Summarize';
     summaryElement.innerText = '';
 
     closePopupButton.addEventListener('click', () => {
         window.close();
     });
 
-    document.body.addEventListener('click', (event) => {
-        if (event.target.id === 'close-popup') return;
-
+    summarizeButton.addEventListener('click', () => {
         statusElement.innerText = 'Processing...';
         summaryElement.innerText = '';
 
