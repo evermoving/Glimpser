@@ -3,6 +3,7 @@
 <head>
     <title>News Summarizer</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="popup-header">
@@ -10,7 +11,10 @@
             <option value="short">Shorter summary</option>
             <option value="long">Longer summary</option>
         </select>
-        <button id="close-popup">X</button>
+        <button id="settings-button" class="icon-button" title="Settings">
+            <i class="fas fa-cog"></i>
+        </button>
+        <button id="close-popup" class="icon-button">X</button>
     </div>
     <div id="status">Select summary type and click Summarize</div>
     <button id="summarize-button" class="action-button">Summarize</button>

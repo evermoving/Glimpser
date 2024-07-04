@@ -4,12 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryTypeSelect = document.getElementById('summary-type');
     const closePopupButton = document.getElementById('close-popup');
     const summarizeButton = document.getElementById('summarize-button');
+    const settingsButton = document.getElementById('settings-button');
 
     statusElement.innerText = 'Select summary type and click Summarize';
     summaryElement.innerText = '';
 
     closePopupButton.addEventListener('click', () => {
         window.close();
+    });
+
+    settingsButton.addEventListener('click', () => {
+        browser.runtime.openOptionsPage();
     });
 
     summarizeButton.addEventListener('click', () => {

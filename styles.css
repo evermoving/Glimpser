@@ -19,15 +19,16 @@ body {
     background-color: rgb(70, 70, 70);
     color: white;
     border: 1px solid rgb(100, 100, 100);
-    padding: 5px;
+    padding: 10px;
 }
 
-#close-popup {
+.icon-button {
     background-color: rgb(70, 70, 70);
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+    margin-left: 5px;
 }
 
 #status {
@@ -52,4 +53,32 @@ body {
     cursor: pointer;
     border-radius: 4px;
     width: 100%;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 80px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -40px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
