@@ -28,7 +28,6 @@ body {
     border: none;
     padding: 8px;
     cursor: pointer;
-    margin-left: 10px;
     border-radius: 50%;
     width: 32px;
     height: 32px;
@@ -40,11 +39,6 @@ body {
 
 .icon-button:hover {
     background-color: rgba(255, 255, 255, 0.1);
-}
-
-#close-popup {
-    font-size: 16px;
-    font-weight: bold;
 }
 
 #status {
