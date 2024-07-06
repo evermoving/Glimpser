@@ -19,7 +19,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 (result.longPrompt || 'Summarise comprehensively');
 
             if (!apiKey) {
-                sendResponse({ success: false, error: 'API key not provided. Right click on the extension -> Manage extension -> Three dots -> Options.' });
+                sendResponse({ success: false, error: 'API key not provided. Go to the extension options to set it.'});
                 return;
             }
 
