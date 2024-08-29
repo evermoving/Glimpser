@@ -3,11 +3,6 @@
   "name": "Glimpser: AI-based text Summariser",
   "version": "1.1",
   "description": "Summarises any piece of text in an opened tab",
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "glimpser@example.com"
-    }
-  },
   "permissions": [
       "activeTab",
       "storage"
