@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Glimpser: AI-based text Summariser",
   "version": "1.1",
-  "description": "Summarises any piece of text in an opened tab",
+  "description": "Summarises any piece of text in the currently active tab, using a model of your choice. Requires OpenRouter API key.",
   "permissions": [
       "activeTab",
       "storage"
