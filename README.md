@@ -1,6 +1,6 @@
 # ![icon](icons/glimpser_48.png) Glimpser
 
-> **Select short or long summary, customise prompts, and use your preferred LLM via OpenRouter. **
+**Select short or long summary, customise prompts, and use your preferred LLM via OpenRouter. **
 
 [![Get it for Firefox!](https://i.imgur.com/TMOLdK6.png)](https://addons.mozilla.org/firefox/addon/web-purifier/)
 
