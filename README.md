@@ -2,7 +2,7 @@
 
 Select short or long summary, customise prompts, and use your preferred LLM via OpenRouter. 
 
-[![Get it for Firefox!](https://i.imgur.com/TMOLdK6.png)](https://addons.mozilla.org/firefox/addon/web-purifier/)
+[![Get it for Firefox!](https://i.imgur.com/TMOLdK6.png)](https://addons.mozilla.org/en-GB/firefox/addon/glimpser-ai-text-summariser/)
 
 For screenshots, see example_images folder. 
 
