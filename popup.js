@@ -34,7 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => {
                     if (response.success && response.summary) {
                         statusElement.innerText = '';
-                        summaryElement.innerHTML = formatSummary(response.summary);
+                        // Clear existing content
+                        while (summaryElement.firstChild) {
+                            summaryElement.removeChild(summaryElement.firstChild);
+                        }
+                        // Append new content safely
+                        const formattedNodes = formatSummary(response.summary);
+                        formattedNodes.forEach(node => summaryElement.appendChild(node));
                     } else {
                         throw new Error(response.error || 'No summary received');
                     }
@@ -45,49 +51,53 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             function formatSummary(text) {
-                if (!text) return '';
+                if (!text) return [];
             
-                // Escape HTML characters
-                let safeText = text.replace(/&/g, "&")
-                                   .replace(/</g, "<")
-                                   .replace(/>/g, ">");
-            
-                // Format Bold text: **text**
-                safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            
-                // Split into lines
-                const lines = safeText.split('\n');
-                let html = '';
-                let inList = false;
+                const nodes = [];
+                const lines = text.split('\n');
+                let currentList = null;
             
                 lines.forEach(line => {
                     const trimmed = line.trim();
                     
                     // Check for bullet points
                     if (trimmed.startsWith('* ') || trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
-                        if (!inList) {
-                            html += '<ul>';
-                            inList = true;
+                        if (!currentList) {
+                            currentList = document.createElement('ul');
+                            nodes.push(currentList);
                         }
+                        
+                        const li = document.createElement('li');
                         // Remove bullet marker
                         const content = trimmed.replace(/^[\*\-•]\s*/, '');
-                        html += `<li>${content}</li>`;
+                        parseAndAppendContent(li, content);
+                        currentList.appendChild(li);
                     } else {
-                        if (inList) {
-                            html += '</ul>';
-                            inList = false;
-                        }
+                        currentList = null;
                         if (trimmed.length > 0) {
-                            html += `<p>${trimmed}</p>`;
+                            const p = document.createElement('p');
+                            parseAndAppendContent(p, trimmed);
+                            nodes.push(p);
                         }
                     }
                 });
             
-                if (inList) {
-                    html += '</ul>';
-                }
-            
-                return html;
+                return nodes;
+            }
+
+            function parseAndAppendContent(element, text) {
+                // Split by bold markers **text**
+                const parts = text.split(/(\*\*.*?\*\*)/g);
+                
+                parts.forEach(part => {
+                    if (part.startsWith('**') && part.endsWith('**')) {
+                        const strong = document.createElement('strong');
+                        strong.textContent = part.slice(2, -2);
+                        element.appendChild(strong);
+                    } else if (part.length > 0) {
+                        element.appendChild(document.createTextNode(part));
+                    }
+                });
             }
     });
 });

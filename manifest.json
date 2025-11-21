@@ -5,7 +5,8 @@
   "description": "Summarises any piece of text in the currently active tab, using a model of your choice. Requires OpenRouter API key.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "{db0058f9-d14f-4f1f-85ce-e9b9afebb573}"
+      "id": "{db0058f9-d14f-4f1f-85ce-e9b9afebb573}",
+      "data_collection_permissions": false
     }
   },
   "permissions": [
