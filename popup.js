@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => {
                     if (response.success && response.summary) {
                         statusElement.innerText = '';
-                        summaryElement.innerText = response.summary;
+                        summaryElement.innerHTML = formatSummary(response.summary);
                     } else {
                         throw new Error(response.error || 'No summary received');
                     }
@@ -42,6 +42,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 .catch(error => {
                     statusElement.innerText = 'Error: ' + error.message;
                 });
-        });
+            });
+            
+            function formatSummary(text) {
+                if (!text) return '';
+            
+                // Escape HTML characters
+                let safeText = text.replace(/&/g, "&")
+                                   .replace(/</g, "<")
+                                   .replace(/>/g, ">");
+            
+                // Format Bold text: **text**
+                safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+                // Split into lines
+                const lines = safeText.split('\n');
+                let html = '';
+                let inList = false;
+            
+                lines.forEach(line => {
+                    const trimmed = line.trim();
+                    
+                    // Check for bullet points
+                    if (trimmed.startsWith('* ') || trimmed.startsWith('- ') || trimmed.startsWith('• ')) {
+                        if (!inList) {
+                            html += '<ul>';
+                            inList = true;
+                        }
+                        // Remove bullet marker
+                        const content = trimmed.replace(/^[\*\-•]\s*/, '');
+                        html += `<li>${content}</li>`;
+                    } else {
+                        if (inList) {
+                            html += '</ul>';
+                            inList = false;
+                        }
+                        if (trimmed.length > 0) {
+                            html += `<p>${trimmed}</p>`;
+                        }
+                    }
+                });
+            
+                if (inList) {
+                    html += '</ul>';
+                }
+            
+                return html;
+            }
     });
 });

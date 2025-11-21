@@ -14,9 +14,9 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
         browser.storage.sync.get(['model', 'apiKey', 'shortPrompt', 'longPrompt']).then((result) => {
             const model = result.model || 'anthropic/claude-3-haiku';
             const apiKey = result.apiKey;
-            const prompt = summaryType === 'short' ? 
-                (result.shortPrompt || 'Summarize the following article for personal research purposes, use bullet points:') :
-                (result.longPrompt || 'Summarise comprehensively');
+            const prompt = summaryType === 'short' ?
+                (result.shortPrompt || 'Summarize the following article for personal research purposes. Use bullet points. Highlight key phrases using **bold** text.') :
+                (result.longPrompt || 'Provide a comprehensive summary of the given text. Use bullet points to structure the content. Highlight key phrases and main ideas using **bold** text. The summary should cover all key points concisely. Text: ');
 
             if (!apiKey) {
                 sendResponse({ success: false, error: 'API key not provided. Go to the extension options to set it.'});

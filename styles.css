@@ -47,7 +47,28 @@ body {
 }
 
 #summary {
-    margin-top: 10px;
+    margin-top: 15px;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+#summary ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+#summary li {
+    margin-bottom: 8px;
+    list-style-type: disc;
+}
+
+#summary p {
+    margin-bottom: 12px;
+}
+
+#summary strong {
+    font-weight: 700;
+    color: #ffffff;
 }
 
 .action-button {
